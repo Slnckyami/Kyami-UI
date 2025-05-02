@@ -10,37 +10,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const element = document.getElementById(id);
             if (element) element[property] = value;
         };
-
-        const randomImageSrc =
-            Array.isArray(settings.header.imageSrc) && settings.header.imageSrc.length > 0
-                ? settings.header.imageSrc[Math.floor(Math.random() * settings.header.imageSrc.length)]
-                : "";
-
-        const dynamicImage = document.getElementById('dynamicImage');
-        if (dynamicImage) {
-            dynamicImage.src = randomImageSrc;
-
-            const setImageSize = () => {
-                const screenWidth = window.innerWidth;
-                if (screenWidth < 768) {
-                    dynamicImage.style.maxWidth = settings.header.imageSize.mobile || "80%";
-                } else if (screenWidth < 1200) {
-                    dynamicImage.style.maxWidth = settings.header.imageSize.tablet || "40%";
-                } else {
-                    dynamicImage.style.maxWidth = settings.header.imageSize.desktop || "40%";
-                }
-                dynamicImage.style.height = "auto";
-            };
-
-            setImageSize();
-            window.addEventListener('resize', setImageSize);
-        }
         
-        setContent('page', 'textContent', settings.name || "Rynn UI");
-        setContent('header', 'textContent', settings.name || "Rynn UI");
-        setContent('name', 'textContent', settings.name || "Rynn UI");
-        setContent('version', 'textContent', settings.version || "v1.0 Beta");
-        setContent('versionHeader', 'textContent', settings.header.status || "Online!");
+        setContent('page', 'textContent', settings.name || "Kyami Silence UI");
+        setContent('wm', 'textContent', `© 2025 ${settings.apiSettings.creator}. All rights reserved.` || "© 2025 Kyami Silence");
+        setContent('header', 'textContent', settings.name || "Kyami Silence UI");
+        setContent('name', 'textContent', settings.name || "Kyami Silence UI");
+        setContent('version', 'textContent', settings.version || "v1.0");
+        setContent('versionHeader', 'textContent', settings.header.status || "Active!");
         setContent('description', 'textContent', settings.description || "Simple API's");
 
         const apiLinksContainer = document.getElementById('apiLinks');
@@ -66,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="${itemClass}" data-name="${item.name}" data-desc="${item.desc}">
                         <div class="hero-section d-flex align-items-center justify-content-between" style="height: 70px;">
                             <div>
-                                <h5 class="mb-0" style="font-size: 18px;">${item.name}</h5>
+                                <h5 class="mb-0" style="font-size: 16px;">${item.name}</h5>
                                 <p class="text-muted mb-0" style="font-size: 0.8rem;">${item.desc}</p>
                             </div>
                             <button class="btn btn-dark btn-sm get-api-btn" data-api-path="${item.path}" data-api-name="${item.name}" data-api-desc="${item.desc}">
@@ -76,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 `;
             }).join('');
-            apiContent.insertAdjacentHTML('beforeend', `<h3 class="mb-3 category-header" style="font-size: 22px;">${category.name}</h3><div class="row">${categoryContent}</div>`);
+            apiContent.insertAdjacentHTML('beforeend', `<h3 class="mb-3 category-header" style="font-size: 21px; font-weight: 600;">${category.name}</h3><div class="row">${categoryContent}</div>`);
         });
 
         const searchInput = document.getElementById('searchInput');
@@ -141,7 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const inputField = document.createElement('input');
                     inputField.type = 'text';
                     inputField.className = 'form-control';
-                    inputField.placeholder = `Enter ${param}...`;
+                    inputField.placeholder = `input ${param}...`;
                     inputField.dataset.param = param;
 
                     inputField.required = true;
@@ -215,6 +191,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const response = await fetch(apiUrl);
 
                 if (!response.ok) {
+                    console.log(response)
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
@@ -259,10 +236,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     const navbarBrand = document.querySelector('.navbar-brand');
-    if (window.scrollY > 0) {
+    if (window.scrollY > 150) {
+        navbar.style.top = "0"
         navbarBrand.classList.add('visible');
         navbar.classList.add('scrolled');
     } else {
+        navbar.style.top = "-30vh"
         navbarBrand.classList.remove('visible');
         navbar.classList.remove('scrolled');
     }

@@ -1,8 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     color: #4B4B4B;
-    padding: 50px 30px;
-    padding-top: 100px;
+    padding: 25px 30px;
 }
 
 body.no-scroll {
@@ -11,9 +10,9 @@ body.no-scroll {
 
 .navbar {
     background-color: white;
-    padding: 15px 32px;
+    padding: 10px 10px;
     position: fixed;
-    top: 0;
+    top: -30vh;
     left: 0;
     right: 0;
     z-index: 100;
@@ -55,6 +54,18 @@ body.no-scroll {
     max-height: 80vh;
 }
 
+
+@keyframes op {
+0% { opacity: .2; }
+100% { opacity: 1; }
+}
+
+
+#versionHeader {
+animation: op 0.8s infinite alternate;
+}
+
+
 .modal-body {
     max-height: 60vh;
     overflow-y: auto;
@@ -82,6 +93,7 @@ body.no-scroll {
 
 #apiLinks a {
     display: block;
+    color: rgba(0, 0, 0, 0.8);
     text-decoration: underline;
     margin-bottom: 0.3rem;
 }
@@ -108,10 +120,18 @@ body.no-scroll {
     margin-bottom: 10px;
 }
 
+@keyframes colorChange {
+    0% { color: purple; }
+    50% { color: #4d83e8; }
+    100% { color: rgba(0, 0, 0, 0.7); }
+}
+
 #name {
     font-size: 32px;
     line-height: 1;
+    font-weight: 600;
     z-index: 2;
+    animation: colorChange 10s infinite alternate;
 }
 
 #version {
@@ -161,9 +181,10 @@ body.no-scroll {
     background-color: #333;
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 8px 20px;
+    border-radius: 10px;
+    padding: 8px 18px;
 }
+
 
 .form-control.is-invalid {
     border-color: #dc3545;
